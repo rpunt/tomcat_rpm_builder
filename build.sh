@@ -34,7 +34,7 @@ reset=$(tput sgr0)
 
 command -v docker >/dev/null 2>&1 || { echo >&2 "${red}I require docker but it's not installed.${reset}"; exit 1; }
 
-docker build -t "rpmbuild-tomcat${MAJOR}" -f "./tomcat.Dockerfile" .
+docker build -t "rpmbuild-tomcat" -f "./tomcat.Dockerfile" .
 
 BUILD="$(pwd)/BUILD"
 mkdir -p "${BUILD}/RPMS"
@@ -50,14 +50,14 @@ if [ ! -f "${BUILD}/SOURCES/apache-tomcat-${VERSION}.tar.gz" ]; then
   exit 1
 fi
 
-sed -e "s/___VERSION___/${VERSION}/g" "${BUILD}/../apache-tomcat-${MAJOR}-template.spec" >"${BUILD}/SCRATCH/apache-tomcat-${VERSION}.spec"
+sed -e "s/___VERSION___/${VERSION}/g" "${BUILD}/../apache-tomcat-template.spec" >"${BUILD}/SCRATCH/apache-tomcat-${VERSION}.spec"
 
 docker run --rm -it \
   --hostname rpmbuild \
   --volume "${BUILD}/RPMS:/home/builder/rpmbuild/RPMS" \
   --volume "${BUILD}/SOURCES:/home/builder/rpmbuild/SOURCES" \
   --volume "${BUILD}/SCRATCH:/home/builder/rpmbuild/SPECS/" \
-  "rpmbuild-tomcat${MAJOR}" \
+  "rpmbuild-tomcat" \
   bash -c "sudo yum-builddep rpmbuild/SPECS/apache-tomcat-${VERSION}.spec; rpmbuild -bb rpmbuild/SPECS/apache-tomcat-${VERSION}.spec"
 
 # # or run interactively for debugging:

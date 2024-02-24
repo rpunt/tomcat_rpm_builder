@@ -65,7 +65,7 @@ fi
 # TODO: replace initscript with unit file
 # %{__rm} -rf /etc/init.d/tomcat
 groupdel tomcat 1>/dev/null 2>&1
-userdel tomcat 1>/dev/mull 2>&1
+userdel tomcat 1>/dev/null 2>&1
 
 %files
 %attr(-,tomcat,tomcat) /opt/tomcat-%{version}
