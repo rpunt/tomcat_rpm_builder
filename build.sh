@@ -22,7 +22,6 @@ if [ "$#" -lt 2 ]; then
   exit 1
 fi
 
-
 # black=$(tput setaf 0)
 red=$(tput setaf 1)
 # green=$(tput setaf 2)
