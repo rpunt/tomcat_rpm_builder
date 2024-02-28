@@ -24,7 +24,7 @@ fi
 
 # black=$(tput setaf 0)
 red=$(tput setaf 1)
-# green=$(tput setaf 2)
+green=$(tput setaf 2)
 # yellow=$(tput setaf 3)
 # blue=$(tput setaf 4)
 # magenta=$(tput setaf 5)
@@ -81,7 +81,7 @@ docker run --rm -it \
 RC=$?
 
 if [ $RC != 0 ]; then
-  echo -e "\n$(tput setaf 1)Build process RC: ${RC}\nAn error occurred while building your RPM. Please investigate.$(tput sgr0)\n"
+  echo -e "\n${red}Build process RC: ${RC}\nAn error occurred while building your RPM. Please investigate.${reset}\n"
 else
-  echo -e "\n$(tput setaf 2)Your RPM has been created within ${BUILD}/RPMS/$(tput sgr0)\n"
+  echo -e "\n${green}Your RPM has been created within ${BUILD}/RPMS/${reset}\n"
 fi
